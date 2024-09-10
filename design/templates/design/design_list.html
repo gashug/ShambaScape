@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Garden Designs</title>
+    <link rel="stylesheet" href="{% static 'design/css/style.css' %}">
+</head>
+<body>
+    <h1>Your Garden Designs</h1>
+
+    <!-- Display the list of designs -->
+    <ul class="design-list">
+        {% for design in designs %}
+            <li>
+                <a href="{% url 'design_detail' design.id %}">{{ design.name }}</a>
+                (Created: {{ design.created_at }})
+            </li>
+        {% empty %}
+            <p>No designs found. <a href="{% url 'design_create' %}">Create a new design</a>.</p>
+        {% endfor %}
+    </ul>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <a href="{% url 'home' %}" class="nav-link">Back to Home</a>
+    </div>
+</body>
+</html>
