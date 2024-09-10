@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Designs</title>
+</head>
+<body>
+    <h1>Your Designs</h1>
+    <ul>
+        {% for design in designs %}  <!-- Loop through each design and display its details -->
+            <li>
+                <a href="{% url 'design_detail' design.id %}">{{ design.name }}</a>
+                (Created: {{ design.created_at }})
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'design_create' %}">Create New Design</a>  <!-- Link to create a new design -->
+</body>
+</html>

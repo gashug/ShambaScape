@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ design.name }}</title>
+    <style>
+        #garden-canvas {
+            width: 80%;
+            height: 400px;
+            border: 1px solid #ccc;
+            position: relative;  /* Needed for absolute positioning of elements */
+        }
+        .plant {
+            position: absolute;  /* Allows the plant to be moved within the canvas */
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ design.name }}</h1>  <!-- Display the name of the design -->
+    <div id="garden-canvas">
+        <!-- This is the canvas where plants or design elements can be placed -->
+        <!-- In the future, this will allow drag-and-drop functionality -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('garden-canvas');  // Get the canvas element
+            let selectedElement = null;
+
+            // Allow plants to be dragged
+            canvas.addEventListener('mousedown', function(e) {
+                if (e.target.classList.contains('plant')) {  // Check if the clicked element is a plant
+                    selectedElement = e.target;  // Make the clicked plant draggable
+                }
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (selectedElement) {
+                    selectedElement.style.left = e.pageX - canvas.offsetLeft + 'px';  // Move the plant along X axis
+                    selectedElement.style.top = e.pageY - canvas.offsetTop + 'px';  // Move the plant along Y axis
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                selectedElement = null;  // Stop dragging when the mouse is released
+            });
+        });
+    </script>
+</body>
+</html>
