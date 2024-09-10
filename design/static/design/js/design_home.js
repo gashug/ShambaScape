@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.carousel-slide');
     const nextButton = document.getElementById('nextSlide');
     const prevButton = document.getElementById('prevSlide');
+    const slideInterval = 5000;
 
     // Show the current slide
     function showSlide(index) {
@@ -23,10 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(slideIndex);
     }
 
+    const autoSlide = setInterval(nextSlide, slideInterval);
+
     // Initial display
     showSlide(slideIndex);
 
-    // Event listeners for next/previous buttons
-    nextButton.addEventListener('click', nextSlide);
-    prevButton.addEventListener('click', prevSlide);
+    // Event listeners for next/previous buttons (allow user control)
+    nextButton.addEventListener('click', () => {
+        clearInterval(autoSlide);  // Stop auto-slideshow when user interacts
+        nextSlide();
+    });
+
+    prevButton.addEventListener('click', () => {
+        clearInterval(autoSlide);  // Stop auto-slideshow when user interacts
+        prevSlide();
+    });
 });
