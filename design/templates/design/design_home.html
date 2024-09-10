@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garden Design - ShambaScape</title>
+    <!-- Linking design-specific CSS -->
+    <link rel="stylesheet" href="{% static 'design/design_home.css' %}">
+</head>
+<body>
+    <!-- Carousel Section -->
+    <section class="carousel">
+        <h1>Get Inspired by Beautiful Garden Designs</h1>
+        <div class="carousel-container">
+            <img class="carousel-slide" src="{% static 'design/Carousel_1' %}" alt="Garden Design 1">
+            <img class="carousel-slide" src="{% static 'design/Carousel_2.jpg' %}" alt="Garden Design 2">
+            <img class="carousel-slide" src="{% static 'design/Carousel_3.jpg' %}" alt="Garden Design 3">
+            <img class="carousel-slide" src="{% static 'design/Carousel_4.jpg' %}" alt="Garden Design 4">
+            <img class="carousel-slide" src="{% static 'design/Carousel_5.jpg' %}" alt="Garden Design 5">
+            <img class="carousel-slide" src="{% static 'design/Carousel_6.jpg' %}" alt="Garden Design 6">
+        </div>
+        <div class="carousel-buttons">
+            <button id="prevSlide">&lt;</button>
+            <button id="nextSlide">&gt;</button>
+        </div>
+    </section>
+
+    <!-- Create New Design Button -->
+    <section class="create-design">
+        <a href="{% url 'design_create' %}" class="create-btn">Create New Design</a>
+    </section>
+
+    <!-- Navigation Links -->
+    <section class="navigation">
+        <a href="{% url 'design_list' %}" class="nav-link">View Your Designs</a>
+        <a href="{% url 'home' %}" class="nav-link">Back to Home</a>
+    </section>
+
+    <!-- Linking design-specific JavaScript -->
+    <script src="{% static 'design/js/design_home.js' %}"></script>
+</body>
+</html>
