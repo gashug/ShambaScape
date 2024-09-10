@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'design.apps.DesignConfig',
+    'plants.apps.PlantsConfig',
+    'planner.apps.PlannerConfig',
 ]
 
 MIDDLEWARE = [
@@ -47,9 +50,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'design.apps.DesignConfig',
-    'plants.apps.PlantsConfig',
-    'planner.apps.PlannerConfig',
 ]
 
 ROOT_URLCONF = 'ShambaScape.urls'
