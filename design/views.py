@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from .models import Design
 
 # View to display all designs
-def design_list(request):
+def design_home(request):
     designs = Design.objects.all() # Fetch all designs
-    return render(request, "design/design_list.html", {"designs": designs})
+    return render(request, "design/design_home.html", {"designs": designs})
                   
 # View to create a new design)
 def design_create(request):
