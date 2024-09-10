@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ plant.name }}</title>
+</head>
+<body>
+    <h1>{{ plant.name }}</h1>
+    <p>Category: {{ plant.category.name }}</p>
+    <p>Sunlight Requirements: {{ plant.get_sun_exposure_display }}</p>
+    <p>Water Requirements: {{ plant.get_water_requirements_display }}</p>
+    <p>Soil Requirements: {{ plant.soil_requirements }}</p>
+    <p>Bloom Time: {{ plant.get_bloom_time_display }}</p>
+    <p>Harvest Time: {{ plant.harvest_time }}</p>
+    <p>{{ plant.description }}</p>
+</body>
+</html>
