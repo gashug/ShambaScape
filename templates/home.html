@@ -3,18 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShambaScape Home</title>
+    <title>ShambaScape - Your Garden Design Companion</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Welcome to ShambaScape!</h1>
-    <p>Your ultimate garden design and planning tool.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to ShambaScape</h1>
+            <p>Design, Plan, and Manage Your Dream Garden with Ease.</p>
+            <a href="{% url 'design_list' %}" class="cta-btn">Start Designing</a>
+        </div>
+    </section>
 
-    <nav>
-        <ul>
-            <li><a href="{% url 'design_list' %}">Garden Design</a></li>
-            <li><a href="{% url 'plant_list' %}">Plant Library</a></li>
-            <li><a href="{% url 'task_list' %}">Garden Planner</a></li>
-        </ul>
-    </nav>
+    <!-- Feature Overview Section -->
+    <section class="features">
+        <h2>What We Offer</h2>
+        <div class="feature-list">
+            <div class="feature">
+                <img src="{% static 'images/design-icon.png' %}" alt="Design Icon">
+                <h3>Garden Design</h3>
+                <p>Create beautiful, functional garden layouts with our easy-to-use design tools.</p>
+                <a href="{% url 'design_list' %}" class="feature-link">Explore</a>
+            </div>
+            <div class="feature">
+                <img src="{% static 'images/plants-icon.png' %}" alt="Plants Icon">
+                <h3>Plant Library</h3>
+                <p>Access a comprehensive plant library to find the perfect plants for your garden.</p>
+                <a href="{% url 'plant_list' %}" class="feature-link">Browse Plants</a>
+            </div>
+            <div class="feature">
+                <img src="{% static 'images/planner-icon.png' %}" alt="Planner Icon">
+                <h3>Garden Planner</h3>
+                <p>Stay on top of your garden tasks with our intuitive planner and reminder system.</p>
+                <a href="{% url 'task_list' %}" class="feature-link">Plan Tasks</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 ShambaScape. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>  <!-- Add interactivity -->
 </body>
 </html>
