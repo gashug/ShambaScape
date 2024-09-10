@@ -1,0 +1,114 @@
+/* General Styles */
+body {
+    font-family: 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url("{% static 'images/garden-bg.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.5);  /* Add transparency for better text readability */
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.cta-btn {
+    background-color: #2ecc71;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cta-btn:hover {
+    background-color: #27ae60;
+}
+
+/* Features Section */
+.features {
+    padding: 50px 0;
+    background-color: #ecf0f1;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+.feature-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.feature {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feature img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #2980b9;
+}
+
+.feature p {
+    margin-bottom: 20px;
+    color: #7f8c8d;
+}
+
+.feature-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.feature-link:hover {
+    color: #2980b9;
+}
+
+/* Footer Section */
+footer {
+    background-color: #34495e;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
