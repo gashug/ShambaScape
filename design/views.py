@@ -18,4 +18,4 @@ def design_create(request):
 # View to display a specific design (the drag-and-drop canvas)
 def design_detail(request, design_id):
     design = Design.objects.get(id=design_id)
-    return render(request, "designs/design_detail.html", {"design": design})
+    return render(request, "design/design_detail.html", {"design": design})
