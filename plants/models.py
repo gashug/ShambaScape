@@ -10,7 +10,7 @@ class PlantCategory(models.Model):
 class Plant(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)  # Optional description of the plant
-    category = models.ForeignKey(PlantCategory, on_delete=SET_NULL, null=  True) # Each plant belongs to a category
+    category = models.ForeignKey(PlantCategory, on_delete=models.SET_NULL, null=  True) # Each plant belongs to a category
     sun_exposure = models.CharField(max_length=50, choices=[
         ('full_sun', 'Full Sun'),
         ('partial_shade', 'Partial Shade'),
