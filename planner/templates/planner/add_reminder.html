@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Reminder</title>
+</head>
+<body>
+    <h1>Add Reminder for {{ task.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="remind_at">Remind At:</label>
+        <input type="datetime-local" id="remind_at" name="remind_at" required>
+        <button type="submit">Add Reminder</button>
+    </form>
+</body>
+</html>
