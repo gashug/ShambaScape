@@ -1,17 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Design</title>
+    <title>Create New Garden Design</title>
+    <link rel="stylesheet" href="{% static 'design/css/design_create.css' %}">
 </head>
 <body>
-    <h1>Create a New Design</h1>
-    <form method="POST">
-        {% csrf_token %}  <!-- Django CSRF protection token -->
-        <label for="name">Design Name:</label>
-        <input type="text" id="name" name="name" required>  <!-- Input for design name -->
-        <button type="submit">Create Design</button>  <!-- Submit button -->
-    </form>
+    <h1>Create a New Garden Design</h1>
+
+    <!-- Design Creation Form -->
+    <section class="create-design-form">
+        <form method="POST">
+            {% csrf_token %}  <!-- Django's CSRF protection -->
+            
+            <!-- Design Name -->
+            <div class="form-group">
+                <label for="name">Design Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter design name" required>
+            </div>
+
+            <!-- Design Description -->
+            <div class="form-group">
+                <label for="description">Design Description:</label>
+                <textarea id="description" name="description" rows="4" placeholder="Brief description of your design"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Create Design</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Navigation Links -->
+    <section class="navigation">
+        <a href="{% url 'design_home' %}" class="nav-link">Back to Design Home</a>
+    </section>
+
+    <script src="{% static 'design/js/design_create.js' %}"></script>
 </body>
 </html>

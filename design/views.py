@@ -12,12 +12,18 @@ def design_list(request):
                   
 # View to create a new design)
 def design_create(request):
-    if request.method == "POST":
-        # Create a new design
-        name = request.POST.get("name")
-        design = Design.objects.create(name=name, layout_data={}) # Create a design without a user association
-        return redirect("design_detail", design_id=design.id)
-    return render(request, "design/design_create.html")
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        
+        # Create a new design object and save it to the database
+        new_design = Design.objects.create(name=name, description=description)
+        new_design.save()
+        
+        # Redirect to the list of designs or the new design's detail page
+        return redirect('design_list')
+    
+    return render(request, 'design/design_create.html')
 
 # View to display a specific design (the drag-and-drop canvas)
 def design_detail(request, design_id):
