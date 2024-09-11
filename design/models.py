@@ -4,6 +4,7 @@ from django.db import models # Importing Django's model library
 # Model representing a garden design
 class Design(models.Model):
     name = models.CharField(max_length=100) # Name of the design
+    description = models.TextField(blank=True)  # Optional description of the design
     layout_data = models.JSONField() # Stores the design layout as JSON (e.g., positions of plants)
     created_at = models.DateTimeField(auto_now_add=True) # Timestamp when the design was created
 
