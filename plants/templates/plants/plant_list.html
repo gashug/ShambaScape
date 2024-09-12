@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="{% static 'plants/css/plant_list.css' %}">
 </head>
 <body>
-    <h1>Plants</h1>
-
+     <!-- "Create Plant" button -->
+     <div class="create-plant-container">
+        <a href="{% url 'plant_create' %}" class="btn-create">Create New Plant</a>
+    </div>
+    
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-container">

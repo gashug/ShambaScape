@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create/Edit Plant</title>
+    <link rel="stylesheet" href="{% static 'plants/css/plant_form.css' %}">
+</head>
+<body>
+    <!-- Back button positioned at the top-right -->
+    <div class="back-button">
+        <a href="{% url 'plant_list' %}" class="btn-back">Back to Plant List</a>
+    </div>
+
+    <h1>{% if form.instance.pk %}Edit Plant{% else %}Add Plant{% endif %}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+    </form>
+
+</body>
+</html>
