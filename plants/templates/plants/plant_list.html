@@ -10,28 +10,25 @@
 <body>
     <h1>Plants</h1>
 
-    <!-- Filter by category -->
-    <div class="filter-section">
-        <form method="GET" action="{% url 'plant_list' %}">
-            <label for="category">Filter by Category:</label>
-            <select name="category" id="category" onchange="this.form.submit()">
-                <option value="">All Categories</option>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Category links -->
+            <ul class="navbar-categories">
+                <li><a href="{% url 'plant_list' %}">All</a></li>
                 {% for category in categories %}
-                    <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
-                        {{ category.name }}
-                    </option>
+                    <li><a href="?category={{ category.id }}">{{ category.name }}</a></li>
                 {% endfor %}
-            </select>
-        </form>
-    </div>
-
-    <!-- Search bar -->
-    <div class="search-section">
-        <form method="GET" action="{% url 'plant_list' %}">
-            <input type="text" name="search" placeholder="Search for a plant..." value="{{ request.GET.search }}">
-            <button type="submit">Search</button>
-        </form>
-    </div>
+            </ul>
+            <!-- Search bar in the navigation -->
+            <div class="navbar-search">
+                <form method="GET" action="{% url 'plant_list' %}">
+                    <input type="text" name="search" placeholder="Search for a plant..." value="{{ request.GET.search }}">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
     <!-- Plant list -->
     <div class="plant-list">
