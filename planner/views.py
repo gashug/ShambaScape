@@ -2,18 +2,25 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task, Reminder
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator
+from django.utils import timezone
 
 # Planner home view
 def planner_home(request):
     # Get upcoming tasks (next 7 days)
-    upcoming_tasks = Task.objects.filter(due_date__gte=datetime.now(), due_date__lte=datetime.now() + timedelta(days=7))
+    upcoming_tasks = Task.objects.filter(
+        due_date__gte=timezone.now(),
+        due_date__lte=timezone.now() + timedelta(days=7)
+    )
     
     # Get upcoming reminders
-    upcoming_reminders = Reminder.objects.filter(remind_at__gte=datetime.now(), remind_at__lte=datetime.now() + timedelta(days=7))
+    upcoming_reminders = Reminder.objects.filter(
+        remind_at__gte=timezone.now(),
+        remind_at__lte=timezone.now() + timedelta(days=7)
+    )
     
     # Task completion stats
-    completed_tasks_count = Task.objects.filter(due_date__lte=datetime.now()).count()
-    pending_tasks_count = Task.objects.filter(due_date__gt=datetime.now()).count()
+    completed_tasks_count = Task.objects.filter(due_date__lte=timezone.now()).count()
+    pending_tasks_count = Task.objects.filter(due_date__gt=timezone.now()).count()
     total_tasks = completed_tasks_count + pending_tasks_count
     progress_percentage = (completed_tasks_count / total_tasks * 100) if total_tasks > 0 else 0
 
@@ -37,7 +44,7 @@ def task_list(request):
     elif status_filter == 'pending':
         tasks = tasks.filter(completed=False)
     elif status_filter == 'overdue':
-        tasks = tasks.filter(due_date__lt=datetime.now(), completed=False)
+        tasks = tasks.filter(due_date__lt=timezone.now(), completed=False)
 
     # Apply pagination (10 tasks per page)
     paginator = Paginator(tasks, 10)
@@ -63,6 +70,10 @@ def task_create(request):
         name = request.POST.get('name')  # Get the task name from the form
         description = request.POST.get('description')  # Get the task description
         due_date = request.POST.get('due_date')  # Get the due date
+
+        # Convert the due_date to a timezone-aware datetime
+        due_date = timezone.make_aware(datetime.strptime(due_date, '%Y-%m-%dT%H:%M'))
+
         Task.objects.create(name=name, description=description, due_date=due_date)  # Create and save the task
         return redirect('task_list')  # Redirect to the task list page
     return render(request, 'planner/task_create.html')
@@ -77,6 +88,10 @@ def task_detail_edit(request, task_id):
         task.name = request.POST.get('name')
         task.description = request.POST.get('description')
         task.due_date = request.POST.get('due_date')
+
+        # Convert the due_date to a timezone-aware datetime
+        task.due_date = timezone.make_aware(datetime.strptime(task.due_date, '%Y-%m-%dT%H:%M'))
+
         task.completed = 'completed' in request.POST  # Mark as completed if the checkbox is checked
         task.save()
         return redirect('task_detail_edit', task_id=task.id)
@@ -91,6 +106,10 @@ def add_reminder(request, task_id):
     task = Task.objects.get(id=task_id)  # Get the task by ID
     if request.method == 'POST':
         remind_at = request.POST.get('remind_at')  # Get the reminder time
+
+        # Convert the remind_at to a timezone-aware datetime
+        remind_at = timezone.make_aware(datetime.strptime(remind_at, '%Y-%m-%dT%H:%M'))
+
         Reminder.objects.create(task=task, remind_at=remind_at)  # Create and save the reminder
         return redirect('task_detail_edit', task_id=task.id)  # Redirect to the task detail page
     return render(request, 'planner/add_reminder.html', {'task': task})
