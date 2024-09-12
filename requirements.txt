@@ -11,7 +11,6 @@ cryptography==41.0.7
 distro==1.9.0
 dj-database-url==2.2.0
 Django==5.0.7
-dnf==4.21.1
 fedora-third-party==0.10
 file-magic==0.4.0
 fros==1.1
