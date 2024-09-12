@@ -1,17 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Reminder</title>
+    <title>Add Reminder for Task: {{ task.name }}</title>
+    <link rel="stylesheet" href="{% static 'planner/css/add_reminder.css' %}">
 </head>
 <body>
-    <h1>Add Reminder for {{ task.name }}</h1>
+
+    <h1>Add Reminder for: {{ task.name }}</h1>
+
     <form method="POST">
         {% csrf_token %}
         <label for="remind_at">Remind At:</label>
-        <input type="datetime-local" id="remind_at" name="remind_at" required>
+        <input type="datetime-local" name="remind_at" required>
+
         <button type="submit">Add Reminder</button>
     </form>
+
+    <a href="{% url 'task_detail_edit' task.id %}">Back to Task</a>
+
 </body>
 </html>

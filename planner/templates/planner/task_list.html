@@ -26,10 +26,12 @@
                 <form method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="task_id" value="{{ task.id }}">
+
+                    <!-- Make task name clickable -->
                     {% if task.completed %}
-                        <span class="task-name completed">{{ task.name }}</span>
+                        <a href="{% url 'task_detail_edit' task.id %}" class="task-name completed">{{ task.name }}</a>
                     {% else %}
-                        <span class="task-name">{{ task.name }} - Due: {{ task.due_date|date:"M d, Y H:i" }}</span>
+                        <a href="{% url 'task_detail_edit' task.id %}" class="task-name">{{ task.name }} - Due: {{ task.due_date|date:"M d, Y H:i" }}</a>
                         <button type="submit" class="mark-completed-btn">Mark as Completed</button>
                     {% endif %}
                 </form>

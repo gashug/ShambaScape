@@ -92,7 +92,7 @@ def add_reminder(request, task_id):
     if request.method == 'POST':
         remind_at = request.POST.get('remind_at')  # Get the reminder time
         Reminder.objects.create(task=task, remind_at=remind_at)  # Create and save the reminder
-        return redirect('task_detail', task_id=task.id)  # Redirect to the task detail page
+        return redirect('task_detail_edit', task_id=task.id)  # Redirect to the task detail page
     return render(request, 'planner/add_reminder.html', {'task': task})
 
 # View to delete an existing task
