@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Task, Reminder
 from datetime import datetime, timedelta
+from django.core.paginator import Paginator
 
 # Planner home view
 def planner_home(request):
@@ -26,8 +27,35 @@ def planner_home(request):
 
 # View to list all tasks
 def task_list(request):
-    tasks = Task.objects.all()  # Fetch all tasks
-    return render(request, 'planner/task_list.html', {'tasks': tasks})
+    # Filtering options
+    status_filter = request.GET.get('status', 'all')  # Get the status filter from query string
+    tasks = Task.objects.all()
+
+    # Apply filters
+    if status_filter == 'completed':
+        tasks = tasks.filter(completed=True)
+    elif status_filter == 'pending':
+        tasks = tasks.filter(completed=False)
+    elif status_filter == 'overdue':
+        tasks = tasks.filter(due_date__lt=datetime.now(), completed=False)
+
+    # Apply pagination (10 tasks per page)
+    paginator = Paginator(tasks, 10)
+    page_number = request.GET.get('page')
+    tasks_page = paginator.get_page(page_number)
+
+    if request.method == 'POST':
+        # Handle marking a task as completed
+        task_id = request.POST.get('task_id')
+        task = Task.objects.get(id=task_id)
+        task.completed = True
+        task.save()
+        return redirect('task_list')
+
+    return render(request, 'planner/task_list.html', {
+        'tasks': tasks_page,
+        'status_filter': status_filter
+    })
 
 # View to create a new task
 def task_create(request):
@@ -39,11 +67,24 @@ def task_create(request):
         return redirect('task_list')  # Redirect to the task list page
     return render(request, 'planner/task_create.html')
 
-# View to display the details of a specific task
-def task_detail(request, task_id):
-    task = Task.objects.get(id=task_id)  # Fetch task by ID
+# View to display and edit the details of a specific task
+def task_detail_edit(request, task_id):
+    task = get_object_or_404(Task, id=task_id)  # Fetch task by ID
     reminders = task.reminders.all()  # Fetch all reminders for the task
-    return render(request, 'planner/task_detail.html', {'task': task, 'reminders': reminders})
+
+    if request.method == 'POST':
+        # Handle task update
+        task.name = request.POST.get('name')
+        task.description = request.POST.get('description')
+        task.due_date = request.POST.get('due_date')
+        task.completed = 'completed' in request.POST  # Mark as completed if the checkbox is checked
+        task.save()
+        return redirect('task_detail_edit', task_id=task.id)
+
+    return render(request, 'planner/task_detail_edit.html', {
+        'task': task,
+        'reminders': reminders
+    })
 
 # View to add a reminder for a task
 def add_reminder(request, task_id):
@@ -53,3 +94,11 @@ def add_reminder(request, task_id):
         Reminder.objects.create(task=task, remind_at=remind_at)  # Create and save the reminder
         return redirect('task_detail', task_id=task.id)  # Redirect to the task detail page
     return render(request, 'planner/add_reminder.html', {'task': task})
+
+# View to delete an existing task
+def task_delete(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    if request.method == 'POST':
+        task.delete()
+        return redirect('task_list')
+    return render(request, 'planner/task_confirm_delete.html', {'task': task})

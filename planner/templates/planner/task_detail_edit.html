@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details: {{ task.name }}</title>
+    <link rel="stylesheet" href="{% static 'planner/css/task_detail_edit.css' %}">
+</head>
+<body>
+
+    <h1>Task Details & Edit: {{ task.name }}</h1>
+
+    <!-- Task Edit Form -->
+    <form method="POST">
+        {% csrf_token %}
+        <label for="name">Task Name:</label>
+        <input type="text" name="name" value="{{ task.name }}" required>
+
+        <label for="description">Description:</label>
+        <textarea name="description">{{ task.description }}</textarea>
+
+        <label for="due_date">Due Date:</label>
+        <input type="datetime-local" name="due_date" value="{{ task.due_date|date:'Y-m-d\TH:i' }}" required>
+
+        <label for="completed">Completed:</label>
+        <input type="checkbox" name="completed" {% if task.completed %}checked{% endif %}>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <!-- Reminders Section -->
+    <div class="reminders-section">
+        <h3>Reminders</h3>
+        <ul>
+            {% for reminder in reminders %}
+                <li>{{ reminder.remind_at|date:"M d, Y H:i" }} - Reminder for task</li>
+            {% empty %}
+                <li>No reminders set for this task.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_reminder' task.id %}" class="btn-add-reminder">Add Reminder</a>
+    </div>
+
+    <!-- Delete Task -->
+    <a href="{% url 'task_delete' task.id %}" class="btn-delete">Delete Task</a>
+
+    <a href="{% url 'task_list' %}">Back to Task List</a>
+
+</body>
+</html>

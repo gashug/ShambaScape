@@ -1,24 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Task</title>
+    <title>Create New Task</title>
+    <link rel="stylesheet" href="{% static 'planner/css/task_create.css' %}">
 </head>
 <body>
+
     <h1>Create a New Task</h1>
+
     <form method="POST">
-        {% csrf_token %}  <!-- CSRF protection -->
+        {% csrf_token %}
         <label for="name">Task Name:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="description">Description:</label>
-        <textarea id="description" name="description"></textarea>
-        
+        <input type="text" name="name" required>
+
+        <label for="description">Description (Optional):</label>
+        <textarea name="description"></textarea>
+
         <label for="due_date">Due Date:</label>
-        <input type="datetime-local" id="due_date" name="due_date" required>
-        
+        <input type="datetime-local" name="due_date" required>
+
         <button type="submit">Create Task</button>
     </form>
+
+    <a href="{% url 'task_list' %}">Back to Task List</a>
+
 </body>
 </html>
