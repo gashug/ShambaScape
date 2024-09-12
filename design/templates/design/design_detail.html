@@ -8,16 +8,40 @@
     <link rel="stylesheet" href="{% static 'design/css/design_detail.css' %}">
 </head>
 <body>
-    <h1>{{ design.name }}</h1>
+    <div class="design-name">
+        <h1>{{ design.name }}</h1>
+    </div>
+
+    <!-- Back to Design Home button -->
+    <div class="back-button">
+        <a href="{% url 'design_home' %}" class="btn-back">Back to Design Home</a>
+    </div>
 
     <div class="design-container">
-        <!-- Toolbox of elements -->
+        <!-- Toolbox of elements with categories -->
         <div class="toolbox">
             <h2>Garden Elements</h2>
+
+            <!-- Plants Category -->
+            <h3>Plants</h3>
             <div class="toolbox-item plant" draggable="true" data-element="plant">Plant</div>
-            <div class="toolbox-item path" draggable="true" data-element="path">Path</div>
-            <div class="toolbox-item flower" draggable="true" data-element="flower">Flower Bed</div>
+            <div class="toolbox-item bush" draggable="true" data-element="bush">Bush</div>
             <div class="toolbox-item tree" draggable="true" data-element="tree">Tree</div>
+
+            <!-- Pathways Category -->
+            <h3>Paths</h3>
+            <div class="toolbox-item path-stone" draggable="true" data-element="path-stone">Stone Path</div>
+            <div class="toolbox-item path-gravel" draggable="true" data-element="path-gravel">Gravel Path</div>
+
+            <!-- Decor Category -->
+            <h3>Decor</h3>
+            <div class="toolbox-item bench" draggable="true" data-element="bench">Bench</div>
+            <div class="toolbox-item water-feature" draggable="true" data-element="water-feature">Water Feature</div>
+            <div class="toolbox-item flower-bed" draggable="true" data-element="flower-bed">Flower Bed</div>
+
+            <!-- New Garden Bed Element -->
+            <h3>Garden Beds</h3>
+            <div class="toolbox-item garden-bed" draggable="true" data-element="garden-bed">Garden Bed</div>
         </div>
 
         <!-- Canvas Area for Drag-and-Drop -->
@@ -28,6 +52,8 @@
 
     <!-- Control buttons -->
     <div class="design-controls">
+        <button id="undo" class="control-btn">Undo</button>
+        <button id="redo" class="control-btn">Redo</button>
         <button id="save-design" class="control-btn">Save Design</button>
         <button id="reset-canvas" class="control-btn">Reset</button>
     </div>
