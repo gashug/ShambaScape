@@ -1,18 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ plant.name }}</title>
+    <title>{{ plant.name }} - Details</title>
+    <link rel="stylesheet" href="{% static 'plants/css/plant_detail.css' %}">
 </head>
 <body>
-    <h1>{{ plant.name }}</h1>
-    <p>Category: {{ plant.category.name }}</p>
-    <p>Sunlight Requirements: {{ plant.get_sun_exposure_display }}</p>
-    <p>Water Requirements: {{ plant.get_water_requirements_display }}</p>
-    <p>Soil Requirements: {{ plant.soil_requirements }}</p>
-    <p>Bloom Time: {{ plant.get_bloom_time_display }}</p>
-    <p>Harvest Time: {{ plant.harvest_time }}</p>
-    <p>{{ plant.description }}</p>
+
+    <!-- Back button to return to the plant list -->
+    <div class="back-button">
+        <a href="{% url 'plant_list' %}" class="btn-back">Back to Plant List</a>
+    </div>
+
+    <!-- Plant Details Section -->
+    <div class="plant-detail-container">
+        <h1>{{ plant.name }}</h1>
+        <p><strong>Description:</strong> {{ plant.description }}</p>
+        <p><strong>Category:</strong> {{ plant.category.name }}</p>
+        <p><strong>Sun Exposure:</strong> {{ plant.get_sun_exposure_display }}</p>
+        <p><strong>Water Requirements:</strong> {{ plant.get_water_requirements_display }}</p>
+        <p><strong>Soil Requirements:</strong> {{ plant.soil_requirements }}</p>
+        
+        {% if plant.bloom_time %}
+            <p><strong>Bloom Time:</strong> {{ plant.get_bloom_time_display }}</p>
+        {% endif %}
+
+        {% if plant.harvest_time %}
+            <p><strong>Harvest Time:</strong> {{ plant.harvest_time }}</p>
+        {% endif %}
+    </div>
+
 </body>
 </html>
