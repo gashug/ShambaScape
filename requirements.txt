@@ -7,6 +7,7 @@ cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
 cryptography==41.0.7
+dj-database-url==1.0.0
 Django==5.0.7
 gunicorn==23.0.0  # Required for Heroku to serve Django
 humanize==3.13.1
