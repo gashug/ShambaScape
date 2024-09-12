@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from .models import Plant, PlantCategory
 
-# View to list all plants and optionally filter by category
+# View to list all plants and optionally filter by category and search by name
 def plant_list(request):
     category_id = request.GET.get('category')  # Get the selected category from the query string
+    search_query = request.GET.get('search')  # Get the search query from the query string
+    
+    plants = Plant.objects.all()
+
     if category_id:
-        plants = Plant.objects.filter(category_id=category_id)  # Filter by category
-    else:
-        plants = Plant.objects.all()  # Show all plants if no filter is applied
+        plants = plants.filter(category_id=category_id)  # Filter by category
+    
+    if search_query:
+        plants = plants.filter(Q(name__icontains=search_query))  # Filter by search query
+    
     categories = PlantCategory.objects.all()  # Get all plant categories
     return render(request, 'plants/plant_list.html', {'plants': plants, 'categories': categories})
 
