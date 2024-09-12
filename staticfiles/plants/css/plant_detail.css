@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2ecc71;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn-back {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.btn-back:hover {
+    background-color: #2980b9;
+}
+
+.plant-detail-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.plant-detail-container p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.plant-detail-container strong {
+    color: #2c3e50;
+}

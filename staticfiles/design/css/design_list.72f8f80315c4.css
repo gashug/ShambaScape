@@ -1,0 +1,57 @@
+/* Design List Page Styling */
+.design-list {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+}
+
+.design-list li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.design-list li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #3498db;
+}
+
+.design-list li a:hover {
+    color: #2ecc71;
+}
+
+.design-list li:hover {
+    background-color: #f0f4f7;
+}
+
+/* Empty state message */
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+/* Navigation */
+.navigation {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.nav-link {
+    margin: 0 10px;
+    font-size: 1.2rem;
+    color: #3498db;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #2ecc71;
+}

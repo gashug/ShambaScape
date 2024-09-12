@@ -1,0 +1,88 @@
+/* Background and layout */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+.planner-home-bg {
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.planner-home-content {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #2ecc71;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+ul li {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.quick-add form input {
+    padding: 10px;
+    margin: 10px 0;
+    width: calc(50% - 12px);
+}
+
+.quick-add button {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    height: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #2ecc71;
+    border-radius: 10px;
+}
+
+.planner-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
