@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner Dashboard</title>
+    <link rel="stylesheet" href="{% static 'planner/css/planner_home.css' %}">
+</head>
+<body>
+    <!-- Full-screen background container -->
+    <div class="planner-home-bg">
+        <div class="planner-home-content">
+            <h1>Your Garden Planner Dashboard</h1>
+            
+            <!-- Task Overview Section -->
+            <div class="task-overview">
+                <h2>Upcoming Tasks</h2>
+                <ul>
+                    {% for task in upcoming_tasks %}
+                        <li>{{ task.name }} - Due on {{ task.due_date|date:"M d, Y" }}</li>
+                    {% empty %}
+                        <li>No upcoming tasks.</li>
+                    {% endfor %}
+                </ul>
+
+                <h2>Upcoming Reminders</h2>
+                <ul>
+                    {% for reminder in upcoming_reminders %}
+                        <li>Reminder for {{ reminder.task.name }} - {{ reminder.remind_at|date:"M d, Y H:i" }}</li>
+                    {% empty %}
+                        <li>No upcoming reminders.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Task Progress Section -->
+            <div class="task-progress">
+                <h2>Task Completion</h2>
+                <p>{{ completed_tasks_count }} tasks completed this week.</p>
+                <p>{{ pending_tasks_count }} tasks pending.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ progress_percentage }}%;"></div>
+                </div>
+            </div>
+
+            <!-- Calendar Section (Later expand with a JS library) -->
+            <div class="calendar-view">
+                <h2>Task Calendar</h2>
+                <p>See all your tasks on a calendar</p>
+                <!-- Future implementation for calendar view -->
+            </div>
+
+            <!-- Quick Add Section -->
+            <div class="quick-add">
+                <h2>Quick Add Task</h2>
+                <form method="POST" action="{% url 'task_create' %}">
+                    {% csrf_token %}
+                    <input type="text" name="name" placeholder="Task Name">
+                    <input type="datetime-local" name="due_date" placeholder="Due Date">
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+
+            <!-- Buttons for full task management -->
+            <div class="planner-actions">
+                <a href="{% url 'task_list' %}" class="btn-primary">Manage All Tasks</a>
+                <a href="{% url 'task_create' %}" class="btn-secondary">Add New Task</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

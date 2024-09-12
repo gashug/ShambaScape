@@ -1,5 +1,28 @@
 from django.shortcuts import render, redirect
 from .models import Task, Reminder
+from datetime import datetime, timedelta
+
+# Planner home view
+def planner_home(request):
+    # Get upcoming tasks (next 7 days)
+    upcoming_tasks = Task.objects.filter(due_date__gte=datetime.now(), due_date__lte=datetime.now() + timedelta(days=7))
+    
+    # Get upcoming reminders
+    upcoming_reminders = Reminder.objects.filter(remind_at__gte=datetime.now(), remind_at__lte=datetime.now() + timedelta(days=7))
+    
+    # Task completion stats
+    completed_tasks_count = Task.objects.filter(due_date__lte=datetime.now()).count()
+    pending_tasks_count = Task.objects.filter(due_date__gt=datetime.now()).count()
+    total_tasks = completed_tasks_count + pending_tasks_count
+    progress_percentage = (completed_tasks_count / total_tasks * 100) if total_tasks > 0 else 0
+
+    return render(request, 'planner/planner_home.html', {
+        'upcoming_tasks': upcoming_tasks,
+        'upcoming_reminders': upcoming_reminders,
+        'completed_tasks_count': completed_tasks_count,
+        'pending_tasks_count': pending_tasks_count,
+        'progress_percentage': progress_percentage,
+    })
 
 # View to list all tasks
 def task_list(request):
